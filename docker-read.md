@@ -177,5 +177,93 @@ Levando isso em consideração podemos mudar nossa visão com relação a infrae
 
 ## **Bora fazer a POC.**
 
-Os arquivos citados nos comandos abaixo estão no GIT e podem ser baixados.
+Os arquivos citados nos exemplos abaixo estão no [GIT](https://github.com/leooroque/poc-docker/archive/master.zip) e podem ser baixados.
+
+Após a criação de sua aplicação e do arquivo Dockfile nós precisamos criar uma imagem que representará todo o ecossistema necessário para rodar a aplicação criada, no caso dessa POC precisamos do *node*.
+
+ 1 - Criar imagem; (certifique que você está na pasta correta)
+ ```
+root@DESKTOP-AMHHKA5 MINGW64 /c/workspace/poc-docker (master)
+$ ls
+app/  Dockerfile  docker-read.md
+ ```
+
+```
+$ docker build . --tag=imagem-poc-app-node
+Sending build context to Docker daemon  3.195MB
+Step 1/6 : FROM node:8-alpine
+ ---> e08ba08cf75a
+Step 2/6 : WORKDIR /app
+ ---> Using cache
+ ---> 86a7001944e9
+Step 3/6 : COPY ./app/ /app
+ ---> Using cache
+ ---> 0f5b0d450ddb
+Step 4/6 : RUN  npm install
+ ---> Using cache
+ ---> e2dae744c59e
+Step 5/6 : EXPOSE 3000
+ ---> Using cache
+ ---> 15e68b77c6b7
+Step 6/6 : CMD ["node", "main.js"]
+ ---> Using cache
+ ---> 81b14b8cfd9c
+Successfully built 81b14b8cfd9c
+Successfully tagged imagem-poc-app-node:latest
+```
+
+Conseguimos validar se nossa imagem foi criada com sucesso executando o seguinte comando:
+
+```
+$ docker image ls
+REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE
+imagem-poc-app-node    latest              81b14b8cfd9c        40 minutes ago      68.4MB
+```
+
+Agora que temos uma imagem contemplando nossa aplicação podemos subir o container.
+
+```
+$ docker run -d -p 80:3000 imagem-poc-app-node
+6e1cf47ecf5268b186baab23c77491280f54cd1238c13c3f41c10a60f7096f97
+```
+> Aqui estamos utilizando o "-d" para não deixar o terminal preso no container que está rodando e o "-p" esta mapeando a porta 3000 do nosso container para a porta 80 da máquina que está executando.
+
+### E como posso saber se o container está realmente em execução ?
+```
+$ docker container ls
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                  NAMES
+6e1cf47ecf52        imagem-poc-app-node   "docker-entrypoint.s…"   7 minutes ago       Up 2 minutes        0.0.0.0:80->3000/tcp   naughty_torvalds
+```
+
+### Mas e se eu quiser matar esse container ?  
+```
+$ docker container stop 6e1cf47ecf52
+6e1cf47ecf52
+
+```
+> Para o comando stop passamos o id do container que queremos parar.
+
+**Ponto de atenção**
+
+Caso você esteja usando o **toolbox** do docker você tera alguns problemas para realizar o teste da sua aplicação, temos a seguinte diferença:
+
+- Para testar utilizando o toolbox precisamos fazer esse passo a passo:
+Executar o comando docker-machine para pegar o IP da máquina virtual que está no auxiliando a rodar o docker.
+
+```
+$ docker-machine ip
+192.168.99.100
+```
+E rodar um teste utilizando este mesmo IP. Podemos usar tanto o curl quanto o browser.
+```
+$ curl http://192.168.99.100:80/isUp
+"API disponivel para consulta, servidor esta no ar !"
+```
+
+- Para executar esse mesmo teste utilizando o docker sem o toolbox, podemos chamar diratamente o localhost.
+
+```
+$ curl http://localhost:80/isUp
+"API disponivel para consulta, servidor esta no ar !"
+```
 
