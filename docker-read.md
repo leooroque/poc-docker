@@ -267,3 +267,7 @@ $ curl http://localhost:80/isUp
 "API disponivel para consulta, servidor esta no ar !"
 ```
 
+
+## Referências 
+
+https://docs.docker.com/
