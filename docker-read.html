@@ -1,0 +1,501 @@
+<!DOCTYPE html><html><head>
+      <title>docker-read</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///C:\Users\BIG BANG BR\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.4.3\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="docker">Docker</h1>
+
+<p>O Docker &#xE9; uma plataforma aberta para desenvolvimento, envio e execu&#xE7;&#xE3;o de aplicativos. O objetivo do docker &#xE9; que voc&#xEA; possa gerenciar sua infraestrutura do mesmo jeito que gerencia seus aplicativos(softwares), ou seja, infraestrutura como c&#xF3;digo (<a href="https://pt.wikipedia.org/wiki/Infraestrutura_como_C%C3%B3digo">IaC</a>). Al&#xE9;m disso ele permite que voc&#xEA; consiga utilizar imagens de ambientes completos para realiza&#xE7;&#xE3;o de promo&#xE7;&#xE3;o entre as camadas(prd/hml/dev) garantindo a integridade do software em todas as etapas.</p>
+<p><em>Benef&#xED;cios:</em></p>
+<ul>
+<li>Agilidade no provisionamento de ambientes;</li>
+<li>Equaliza&#xE7;&#xE3;o dos ambientes;</li>
+<li>IaC;</li>
+<li>Precisa de pouco recurso computacional para rodar;</li>
+</ul>
+<h2 class="mume-header" id="vers%C3%B5es">Vers&#xF5;es</h2>
+
+<p>O Docker est&#xE1; dispon&#xED;vel em 3 vers&#xF5;es, sendo elas:</p>
+<ul>
+<li>Docker Engine - Community</li>
+<li>Docker Engine - Enterprise</li>
+<li>Docker Enterprise</li>
+</ul>
+<blockquote>
+<p><strong>Docker Engine - Community</strong><br>
+Vers&#xE3;o ideal para desenvolvedores que querem come&#xE7;ar a utilizar o Docker.</p>
+</blockquote>
+<blockquote>
+<p><strong>Docker Engine - Enterprise</strong><br>
+Vers&#xE3;o projetada para o desenvolvimento corporativo, nessa vers&#xE3;o ja temos uma SLA de atendimento para as empresas que adotam.</p>
+</blockquote>
+<blockquote>
+<p><strong>Docker Enterprise</strong><br>
+Vers&#xE3;o projetada para grandes corpora&#xE7;&#xF5;es que utilizam o docker no core dos seus neg&#xF3;cios, assim como a vers&#xE3;o citada acima tamb&#xE9;m possui uma SLA.</p>
+</blockquote>
+<h2 class="mume-header" id="motor-do-docker">Motor do Docker</h2>
+
+<p>O docker engine &#xE9; um aplicativo cliente-servidor, sendo que os principais componentes s&#xE3;o:</p>
+<ul>
+<li>Um servidor de longa dura&#xE7;&#xE3;o que roda em background(plano de fundo) como um processo daemon.(comando <em>dockerd</em>)</li>
+</ul>
+<p><strong>Curiosidade</strong></p>
+<blockquote>
+<p><em>Em sistemas operacionais multitarefa, um daemon &#xE9; um programa de computador que executa como um processo em plano de fundo, em vez de estar sob o controle direto de um usu&#xE1;rio interativo. Tradicionalmente, o nome de processo de um daemon termina com a letra d, para deixar claro que o processo &#xE9;, de fato, um daemon, e para diferencia&#xE7;&#xE3;o entre um daemon e um programa de computador normal.[1] Por exemplo, syslogd &#xE9; o daemon que implementa o recurso de logging do sistema e sshd &#xE9; um daemon que serve conex&#xF5;es SSH de entrada.</em></p>
+</blockquote>
+<ul>
+<li>
+<p>Uma API REST que especifica interfaces que os progamas podem usar para conversar com o daemon e instruir  o que fazer.</p>
+</li>
+<li>
+<p>Um cliente CLI(interface de linha de comandos). (Comando <em>docker</em>)</p>
+</li>
+</ul>
+<iframe src="https://drive.google.com/file/d/1ow0eAlTxt1WD6W_DVaw7XPGXcAnY-296/preview" width="640" height="480"></iframe>
+<p>A CLI usa a API REST do Docker para controlar ou interagir com o daemon do Docker por meio de scripts ou comandos diretos da CLI. Muitos outros aplicativos do Docker usam a API e a CLI subjacentes.</p>
+<p><strong>O daemon cria e gerencia objetos do Docker , como imagens, cont&#xEA;ineres, redes e volumes.</strong></p>
+<h2 class="mume-header" id="arquitetura-docker">Arquitetura Docker</h2>
+
+<p>O Docker usa uma arquitetura cliente-servidor. O cliente do Docker fala com o daemon do Docker , que faz o trabalho pesado de construir, executar e distribuir cont&#xEA;ineres do Docker. O cliente e o daemon do Docker podem ser executados no mesmo sistema ou voc&#xEA; pode conectar um cliente do Docker a um daemon do Docker remoto. O cliente e o daemon do Docker se comunicam usando uma API REST, sobre soquetes UNIX ou uma interface de rede.</p>
+<iframe src="https://drive.google.com/file/d/19-MA2Cl6MrbbsH5mjR1Ufxoa0sf1Zrrs/preview" width="640" height="480"></iframe>
+<h3 class="mume-header" id="o-daemon-do-docker-docker-daemon">O daemon do Docker (Docker daemon)</h3>
+
+<p>O daemon do Docker (<em>dockerd</em>) ouve as solicita&#xE7;&#xF5;es da API do Docker e gerencia objetos do Docker, como imagens, cont&#xEA;ineres, redes e volumes. Um daemon tamb&#xE9;m pode se comunicar com outros daemons para gerenciar os servi&#xE7;os do Docker.</p>
+<h3 class="mume-header" id="o-cliente-do-docker-docker-client">O cliente do Docker (Docker client)</h3>
+
+<p>O cliente do Docker (<em>docker</em>) &#xE9; a principal maneira como muitos usu&#xE1;rios do Docker interagem com o Docker. Quando voc&#xEA; usa comandos como <code>docker run</code>, o cliente envia esses comandos para <strong>dockerd</strong>(daemon), que os executa. O comando <strong>docker</strong> usa a API do Docker. O cliente do Docker pode se comunicar com mais de um daemon.</p>
+<h3 class="mume-header" id="registros-docker-docker-registries">Registros Docker (Docker registries)</h3>
+
+<p>O registro do Docker armazena imagens do Docker. O <strong>Docker Hub</strong> &#xE9; um reposit&#xF3;rio p&#xFA;blico que qualquer um pode usar, <strong>e o Docker &#xE9; configurado para procurar imagens no Docker Hub por padr&#xE3;o</strong>. Voc&#xEA; pode at&#xE9; mesmo executar o seu pr&#xF3;prio registro privado. Se voc&#xEA; usa o Docker Datacenter (DDC), ele inclui o DTR (Docker Trusted Registry).</p>
+<p>Quando voc&#xEA; usa os comandos <code>docker pull</code> ou <code>docker run</code>, as imagens necess&#xE1;rias s&#xE3;o extra&#xED;das do registro configurado. Quando voc&#xEA; usa o <code>docker push</code>, sua imagem &#xE9; enviada para o registro configurado.</p>
+<h2 class="mume-header" id="objetos-docker-docker-objects">Objetos Docker (Docker objects)</h2>
+
+<p>Ao usar o Docker, voc&#xEA; est&#xE1; criando e usando imagens, cont&#xEA;ineres, redes, volumes, plug-ins e outros objetos.</p>
+<h3 class="mume-header" id="imagens">Imagens</h3>
+
+<p>Uma imagem &#xE9; um modelo somente leitura com instru&#xE7;&#xF5;es para criar um cont&#xEA;iner Docker. Muitas vezes, <strong>uma imagem &#xE9; baseada em outra imagem, com alguma personaliza&#xE7;&#xE3;o adicional</strong>. Por exemplo, voc&#xEA; pode criar uma imagem baseada na ubuntu, mas instala o servidor web Apache e seu aplicativo, bem como os detalhes de configura&#xE7;&#xE3;o necess&#xE1;rios para executar seu aplicativo.</p>
+<p>Voc&#xEA; pode criar suas pr&#xF3;prias imagens ou usar somente aquelas criadas por outras pessoas e publicadas em um registro. <strong>Para criar sua pr&#xF3;pria imagem, crie um Dockerfile com uma sintaxe simples para definir as etapas necess&#xE1;rias para criar a imagem e execut&#xE1;-la.</strong> Cada instru&#xE7;&#xE3;o em um Dockerfile cria uma camada na imagem. Quando voc&#xEA; altera o Dockerfile e recria a imagem, apenas as camadas que foram alteradas s&#xE3;o reconstru&#xED;das. Isso faz com que as imagens sejam t&#xE3;o leves, pequenas e r&#xE1;pidas quando comparadas a outras tecnologias de virtualiza&#xE7;&#xE3;o.</p>
+<h3 class="mume-header" id="containers">Containers</h3>
+
+<p>Um cont&#xEA;iner &#xE9; uma inst&#xE2;ncia execut&#xE1;vel de uma imagem. Voc&#xEA; pode criar, iniciar, parar, mover ou excluir um cont&#xEA;iner usando a API do Docker ou o CLI. Voc&#xEA; pode conectar um cont&#xEA;iner a uma ou mais redes, anexar armazenamento a ele ou at&#xE9; mesmo criar uma nova imagem com base em seu estado atual.</p>
+<p><strong>Por padr&#xE3;o, um cont&#xEA;iner &#xE9; relativamente bem isolado de outros cont&#xEA;ineres e de sua m&#xE1;quina host.</strong> Voc&#xEA; pode controlar o qu&#xE3;o isolada a rede, o armazenamento ou outros subsistemas subjacentes de um cont&#xEA;iner s&#xE3;o de outros cont&#xEA;ineres ou da m&#xE1;quina host.</p>
+<p>Um cont&#xEA;iner &#xE9; definido por sua imagem e por todas as op&#xE7;&#xF5;es de configura&#xE7;&#xE3;o que voc&#xEA; fornece quando cria ou inicia. <strong>Quando um cont&#xEA;iner &#xE9; removido, quaisquer altera&#xE7;&#xF5;es em seu estado que n&#xE3;o s&#xE3;o armazenadas no armazenamento persistente desaparecem.</strong></p>
+<p><strong>Containers s&#xE3;o:</strong></p>
+<blockquote>
+<p>Flex&#xED;vel: At&#xE9; mesmo os aplicativos mais complexos podem ser cont&#xEA;inerizados.<br>
+Leve: os cont&#xEA;ineres aproveitam e compartilham o kernel do host.<br>
+Intercambi&#xE1;vel: voc&#xEA; pode implantar atualiza&#xE7;&#xF5;es e up-on-the-fly.<br>
+Port&#xE1;til: voc&#xEA; pode criar localmente, implantar na nuvem e executar em qualquer lugar.<br>
+Escal&#xE1;vel: voc&#xEA; pode aumentar e distribuir automaticamente as r&#xE9;plicas do cont&#xEA;iner.<br>
+Empilh&#xE1;vel: voc&#xEA; pode empilhar servi&#xE7;os vertical e on-the-fly.</p>
+</blockquote>
+<h3 class="mume-header" id="servi%C3%A7os-services">Servi&#xE7;os (Services)</h3>
+
+<p>Os servi&#xE7;os permitem dimensionar cont&#xEA;ineres em v&#xE1;rios <em>daemons</em> do Docker, que trabalham juntos como um <em>swarm</em> com v&#xE1;rios gerentes e funcion&#xE1;rios . Cada membro de um swarm &#xE9; um daemon do Docker, <strong>e todos os daemons se comunicam usando a API do Docker.</strong> Um servi&#xE7;o permite que voc&#xEA; defina o estado desejado, como o n&#xFA;mero de r&#xE9;plicas do servi&#xE7;o que devem estar dispon&#xED;veis a qualquer momento. Por padr&#xE3;o, o servi&#xE7;o &#xE9; balanceado por carga em todos os n&#xF3;s do trabalhador. Para o consumidor, o servi&#xE7;o Docker parece ser um &#xFA;nico aplicativo.</p>
+<h1 class="mume-header" id="container-vs-vms">Container vs. VM&apos;s</h1>
+
+<iframe src="https://drive.google.com/file/d/1hgg4tktTs2zAApzO-bOjV1S535UttiU0/preview" width="300" height="240"></iframe>
+VS
+<iframe src="https://drive.google.com/file/d/1k_eWBNLQVeUPdLZm1AZSPaxcIoKovnuN/preview" width="300" height="240"></iframe>
+<p>Como podemos ver nas imagens acima o container utiliza o kernel do pr&#xF3;prio host, ou seja, ele n&#xE3;o ocupa mais mem&#xF3;ria que qualquer outro aplicativo que est&#xE1; sendo executado o tornando mais leve principalmente se comparado a uma VM que utiliza um novo S.O consumindo mais recursos do host.</p>
+<h2 class="mume-header" id="instala%C3%A7%C3%A3o">Instala&#xE7;&#xE3;o</h2>
+
+<p><strong>Agora que sabemos um pouco mais sobre o docker, partiu instalar !</strong></p>
+<p>Vale lembrar que essa instala&#xE7;&#xE3;o &#xE9; para (<strong>Windows</strong>)</p>
+<p>Requisitos de sistema:</p>
+<ul>
+<li>Windows 10 de 64 bits: Pro, Enterprise ou Education (Build 15063 ou posterior).</li>
+<li>A virtualiza&#xE7;&#xE3;o est&#xE1; habilitada no BIOS. Normalmente, a virtualiza&#xE7;&#xE3;o &#xE9; ativada por padr&#xE3;o. Isso &#xE9; diferente de ter o Hyper-V ativado. Para mais detalhes, consulte Virtualiza&#xE7;&#xE3;o deve estar ativado em Solu&#xE7;&#xE3;o de problemas.</li>
+<li>Recurso compat&#xED;vel com CPU SLAT.</li>
+<li>Pelo menos 4 GB de RAM.</li>
+</ul>
+<p>Para voc&#xEA; que tem o mesmo notebook que eu, tenho uma surpresa ! <strong>Nossa m&#xE1;quina n&#xE3;o atende os resquisitos.</strong></p>
+<p>Calma, claro que temos um caminho alternativo meu caro amigo ! A&#xED; vai !</p>
+<blockquote>
+<p>Se o seu sistema n&#xE3;o atender aos requisitos para executar o Docker Desktop for Windows, voc&#xEA; poder&#xE1; instalar o <a href="https://github.com/docker/toolbox/releases">Docker Toolbox</a> (Selecionar a vers&#xE3;o mais atual) , que usa o Oracle Virtual Box em vez do Hyper-V.</p>
+</blockquote>
+<p><strong>Para quem atende os requisitos o ideal &#xE9; utilizar direto o <a href="https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe">docker desktop for windows</a></strong></p>
+<blockquote>
+<p>Voc&#xEA; &#xE9; solicitado a autorizar Docker.app com sua senha do sistema durante o processo de instala&#xE7;&#xE3;o. O acesso privilegiado &#xE9; necess&#xE1;rio para instalar componentes de rede, links para os aplicativos Docker e gerenciar as VMs do Hyper-V. (Isso s&#xF3; acontece quando voc&#xEA; instala o docker for windows o toolbox utiliza o Oracle Virtual Box).</p>
+</blockquote>
+<p>Ap&#xF3;s a instala&#xE7;&#xE3;o abra o prompt de comando e execute:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>docker --version
+</code></pre><p>Nessa data (31/07/2019) a &#xFA;ltima vers&#xE3;o do docker &#xE9;:</p>
+<blockquote>
+<p>Docker version 18.09.3, build 774a1f4eee</p>
+</blockquote>
+<p>Se sua instala&#xE7;&#xE3;o deu certo, ap&#xF3;s clicar no &#xED;cone do docker toolbox voc&#xEA; estar&#xE1; nesse terminal.</p>
+<iframe src="https://drive.google.com/file/d/1LjfQG4RtuWGRGt9oKP_6IoRMHlRTbyuW/preview" width="640" height="480" class="mume-header" id="partiu-fazer-um-hello-world-bora"></iframe>
+## **Partiu fazer um Hello world ? Bora!** 
+
+<pre data-role="codeBlock" data-info class="language-"><code>docker run hello-word
+</code></pre><iframe src="https://drive.google.com/file/d/1alDesTKq8tJbGXf30OnGlWRupv5NB9r8/preview" width="640" height="480"></iframe>
+<h3 class="mume-header" id="o-que-podemos-identificar-com-o-retorno-desse-log">O que podemos identificar com o retorno desse log ?</h3>
+
+<p>Conforme explicado acima o docker tem um reposit&#xF3;rio local onde ele grava as imagens e um reposit&#xF3;rio web mais conhecido como <a href="https://hub.docker.com/">Docker HUB</a>, como n&#xF3;s n&#xE3;o tinhamos nenhuma imagem chamada hello-world localmente ele fez o download dessa imagem do dockerhub e criou o container como podemos ver nas linhas abaixo.</p>
+<blockquote>
+<p>Com o comando <em>docker image ls</em> n&#xF3;s podemos listar as imagens que temos localmente para serem utilizadas e agora que baixamos uma imagem do dockerhub ela deveria aparecer.</p>
+</blockquote>
+<pre data-role="codeBlock" data-info class="language-"><code>docker image ls
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+hello-world         latest              fce289e99eb9        7 months ago        1.84kB
+</code></pre><h3 class="mume-header" id="lembra-que-eu-disse-que-n%C3%B3s-rodamos-um-container">Lembra que eu disse que n&#xF3;s rodamos um container  ?</h3>
+
+<pre data-role="codeBlock" data-info class="language-"><code>docker container ls --all
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
+47d0b59e38f6        hello-world         &quot;/hello&quot;            18 minutes ago      Exited (0) 13 minutes ago                       kind_newton
+</code></pre><p>Simples, r&#xE1;pido, f&#xE1;cil e indolor ! Isso &#xE9; o docker.</p>
+<h2 class="mume-header" id="dockerfile">DOCKERFILE</h2>
+
+<p>Bom agora que voc&#xEA; ja entendeu o que &#xE9; o docker e ja fez o seu &quot;ol&#xE1; mundo&quot; vamos aprender um pouco sobre o dockerfile.<br>
+O Dockerfile em si pode ser considerado a parte do IaC (Infraestrutura como c&#xF3;digo), com ele n&#xF3;s temos uma receita de bolo para montar o nosso container e conseguimos especificar todos os detalhes em sua cria&#xE7;&#xE3;o, como por exemplo:</p>
+<ul>
+<li>Qual aplicativo vamos rodar dentro do container;</li>
+<li>Qual porta ser&#xE1; disponibilizadas nesse aplicativo;</li>
+<li>Quais dependencias;</li>
+</ul>
+<p>Levando isso em considera&#xE7;&#xE3;o podemos mudar nossa vis&#xE3;o com rela&#xE7;&#xE3;o a infraestrutura, agora com o dockerfile n&#xF3;s podemos versionsar essa &quot;receita&quot;, todos os desenvolvedores ter&#xE3;o acesso a um ambiente com as mesmas caracteristicas mitigando possiveis problemas de ambiente.</p>
+<h2 class="mume-header" id="bora-fazer-a-poc"><strong>Bora fazer a POC.</strong></h2>
+
+<p>Os arquivos citados nos exemplos abaixo est&#xE3;o no <a href="https://github.com/leooroque/poc-docker/archive/master.zip">GIT</a> e podem ser baixados.</p>
+<p>Ap&#xF3;s a cria&#xE7;&#xE3;o de sua aplica&#xE7;&#xE3;o e do arquivo Dockfile n&#xF3;s precisamos criar uma imagem que representar&#xE1; todo o ecossistema necess&#xE1;rio para rodar a aplica&#xE7;&#xE3;o criada, no caso dessa POC precisamos do <em>node</em>.</p>
+<p>1 - Criar imagem; (certifique que voc&#xEA; est&#xE1; na pasta correta)</p>
+<pre data-role="codeBlock" data-info class="language-"><code>root@DESKTOP-AMHHKA5 MINGW64 /c/workspace/poc-docker (master)
+$ ls
+app/  Dockerfile  docker-read.md
+</code></pre><pre data-role="codeBlock" data-info class="language-"><code>$ docker build . --tag=imagem-poc-app-node
+Sending build context to Docker daemon  3.195MB
+Step 1/6 : FROM node:8-alpine
+ ---&gt; e08ba08cf75a
+Step 2/6 : WORKDIR /app
+ ---&gt; Using cache
+ ---&gt; 86a7001944e9
+Step 3/6 : COPY ./app/ /app
+ ---&gt; Using cache
+ ---&gt; 0f5b0d450ddb
+Step 4/6 : RUN  npm install
+ ---&gt; Using cache
+ ---&gt; e2dae744c59e
+Step 5/6 : EXPOSE 3000
+ ---&gt; Using cache
+ ---&gt; 15e68b77c6b7
+Step 6/6 : CMD [&quot;node&quot;, &quot;main.js&quot;]
+ ---&gt; Using cache
+ ---&gt; 81b14b8cfd9c
+Successfully built 81b14b8cfd9c
+Successfully tagged imagem-poc-app-node:latest
+</code></pre><p>Conseguimos validar se nossa imagem foi criada com sucesso executando o seguinte comando:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>$ docker image ls
+REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE
+imagem-poc-app-node    latest              81b14b8cfd9c        40 minutes ago      68.4MB
+</code></pre><p>Agora que temos uma imagem contemplando nossa aplica&#xE7;&#xE3;o podemos subir o container.</p>
+<pre data-role="codeBlock" data-info class="language-"><code>$ docker run -d -p 80:3000 imagem-poc-app-node
+6e1cf47ecf5268b186baab23c77491280f54cd1238c13c3f41c10a60f7096f97
+</code></pre><blockquote>
+<p>Aqui estamos utilizando o &quot;-d&quot; para n&#xE3;o deixar o terminal preso no container que est&#xE1; rodando e o &quot;-p&quot; esta mapeando a porta 3000 do nosso container para a porta 80 da m&#xE1;quina que est&#xE1; executando.</p>
+</blockquote>
+<h3 class="mume-header" id="e-como-posso-saber-se-o-container-est%C3%A1-realmente-em-execu%C3%A7%C3%A3o">E como posso saber se o container est&#xE1; realmente em execu&#xE7;&#xE3;o ?</h3>
+
+<pre data-role="codeBlock" data-info class="language-"><code>$ docker container ls
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                  NAMES
+6e1cf47ecf52        imagem-poc-app-node   &quot;docker-entrypoint.s&#x2026;&quot;   7 minutes ago       Up 2 minutes        0.0.0.0:80-&gt;3000/tcp   naughty_torvalds
+</code></pre><h3 class="mume-header" id="mas-e-se-eu-quiser-matar-esse-container">Mas e se eu quiser matar esse container ?</h3>
+
+<pre data-role="codeBlock" data-info class="language-"><code>$ docker container stop 6e1cf47ecf52
+6e1cf47ecf52
+
+</code></pre><blockquote>
+<p>Para o comando stop passamos o id do container que queremos parar.</p>
+</blockquote>
+<p><strong>Ponto de aten&#xE7;&#xE3;o</strong></p>
+<p>Caso voc&#xEA; esteja usando o <strong>toolbox</strong> do docker voc&#xEA; tera alguns problemas para realizar o teste da sua aplica&#xE7;&#xE3;o, temos a seguinte diferen&#xE7;a:</p>
+<ul>
+<li>Para testar utilizando o toolbox precisamos fazer esse passo a passo:<br>
+Executar o comando docker-machine para pegar o IP da m&#xE1;quina virtual que est&#xE1; no auxiliando a rodar o docker.</li>
+</ul>
+<pre data-role="codeBlock" data-info class="language-"><code>$ docker-machine ip
+192.168.99.100
+</code></pre><p>E rodar um teste utilizando este mesmo IP. Podemos usar tanto o curl quanto o browser.</p>
+<pre data-role="codeBlock" data-info class="language-"><code>$ curl http://192.168.99.100:80/isUp
+&quot;API disponivel para consulta, servidor esta no ar !&quot;
+</code></pre><ul>
+<li>Para executar esse mesmo teste utilizando o docker sem o toolbox, podemos chamar diratamente o localhost.</li>
+</ul>
+<pre data-role="codeBlock" data-info class="language-"><code>$ curl http://localhost:80/isUp
+&quot;API disponivel para consulta, servidor esta no ar !&quot;
+</code></pre><h2 class="mume-header" id="refer%C3%AAncias">Refer&#xEA;ncias</h2>
+
+<p><a href="https://docs.docker.com/">https://docs.docker.com/</a></p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
